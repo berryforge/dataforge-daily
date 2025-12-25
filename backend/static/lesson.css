@@ -1,0 +1,203 @@
+:root {
+  --bg-main: #1b1b1b;
+  --bg-panel: #202020;
+  --bg-panel-alt: #262626;
+  --bg-terminal: #0f0f0f;
+
+  --text-main: #f2f2f2;
+  --text-muted: #b5b5b5;
+  --text-dim: #8a8a8a;
+
+  --accent-orange: #ff7a18;
+  --accent-orange-dark: #e06612;
+  --accent-green: #4caf50;
+  --accent-red: #e53935;
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+}
+
+/* Lesson page baseline */
+body.page-lesson {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg-main);
+  color: var(--text-main);
+}
+
+/* Main app layout */
+body.page-lesson .app {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  min-height: 100vh;
+}
+
+/* LEFT PANEL */
+body.page-lesson .lesson-panel {
+  background: linear-gradient(180deg, #242424, #1e1e1e);
+  border-right: 1px solid var(--border-subtle);
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Header row (logo + home button) */
+body.page-lesson .lesson-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+body.page-lesson .lesson-logo {
+  height: 80px;
+  width: 80px
+}
+
+body.page-lesson .back-home {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 6px 10px;
+  border: 1px solid var(--border-subtle);
+  transition: all 0.2s ease;
+}
+
+body.page-lesson .back-home:hover {
+  color: var(--accent-orange);
+  border-color: var(--accent-orange);
+}
+
+body.page-lesson .lesson-panel h1 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--accent-orange);
+}
+
+body.page-lesson .lesson-panel h2 {
+  font-size: 20px;
+  margin: 0;
+  color: var(--text-main);
+}
+
+body.page-lesson .lesson-panel p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+body.page-lesson .hint {
+  margin-top: 12px;
+  padding: 14px 16px;
+  background: var(--bg-panel-alt);
+  border-left: 4px solid var(--accent-orange);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Next button */
+body.page-lesson .next-btn {
+  margin-top: auto;
+  background: var(--accent-orange);
+  color: #111;
+  border: none;
+  padding: 10px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+body.page-lesson .next-btn:enabled {
+  opacity: 1;
+}
+
+body.page-lesson .next-btn:enabled:hover {
+  background: var(--accent-orange-dark);
+}
+
+/* RIGHT PANEL */
+body.page-lesson .editor-panel {
+  background: var(--bg-panel);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+body.page-lesson .terminal-header {
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+body.page-lesson .terminal-window {
+  background: var(--bg-terminal);
+  border: 1px solid var(--border-subtle);
+  padding: 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: 180px;
+}
+
+body.page-lesson .prompt {
+  color: var(--accent-orange);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 14px;
+  padding-top: 6px;
+}
+
+body.page-lesson #code {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  color: var(--text-main);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 150px;
+}
+
+/* Run button */
+body.page-lesson .editor-panel button {
+  align-self: flex-start;
+  background: var(--accent-orange);
+  color: #111;
+  border: none;
+  padding: 10px 22px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+body.page-lesson .editor-panel button:hover {
+  background: var(--accent-orange-dark);
+}
+
+/* Output */
+body.page-lesson .terminal-output {
+  background: #0b0b0b;
+  border: 1px solid var(--border-subtle);
+  padding: 14px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 13px;
+  color: var(--text-main);
+  max-height: 320px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  body.page-lesson .app {
+    grid-template-columns: 1fr;
+  }
+
+  body.page-lesson .lesson-panel {
+    border-right: none;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+}

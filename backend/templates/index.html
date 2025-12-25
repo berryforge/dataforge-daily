@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ module_title }} – Lesson {{ lesson_id }}</title>
+    <link rel="stylesheet" href="/static/lesson.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+
+<body class="page-lesson">
+
+<div class="app">
+
+    <!-- LEFT PANEL: LESSON -->
+    <div class="lesson-panel">
+
+        <!-- HEADER -->
+        <div class="lesson-header">
+            <img
+                src="/static/logo.png"
+                alt="DataForge Daily"
+                class="lesson-logo"
+                width="100px"
+                height="100px"
+            />
+
+            <a href="/" class="back-home">← Home</a>
+        </div>
+
+        <h1>{{ module_title }}</h1>
+        <h2>Lesson {{ lesson_id }}: {{ lesson.title }}</h2>
+
+        <p>{{ lesson.instruction }}</p>
+
+        {% if lesson.hint %}
+        <div class="hint">
+            💡 {{ lesson.hint }}
+        </div>
+        {% endif %}
+
+        {% if lesson_id < max_lesson %}
+        <div class="lesson-progress">
+            <button
+                id="nextLessonBtn"
+                class="next-btn"
+                disabled
+                onclick="goToNextLesson()"
+            >
+                Next Lesson →
+            </button>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- RIGHT PANEL: TERMINAL -->
+    <div class="editor-panel">
+
+        <div class="terminal-header">Python</div>
+
+        <div class="terminal-window">
+            <span class="prompt">&gt;&gt;&gt;</span>
+            <textarea
+                id="code"
+                spellcheck="false"
+                autocomplete="off"
+                autofocus
+            ></textarea>
+        </div>
+
+        <button onclick="runCode()">Run Code</button>
+
+        <div class="terminal-output">
+            <pre id="output"></pre>
+        </div>
+
+    </div>
+</div>
+
+<script>
+const codeEl = document.getElementById("code");
+const outputEl = document.getElementById("output");
+const nextBtn = document.getElementById("nextLessonBtn");
+
+const moduleId = "{{ module_id }}";
+const lessonId = Number("{{ lesson_id }}");
+
+/* =========================
+   PROGRESS HELPERS
+   ========================= */
+
+function getProgress() {
+    return JSON.parse(localStorage.getItem("lessonProgress")) || {};
+}
+
+function markLessonComplete(moduleId, lessonId) {
+    const progress = getProgress();
+
+    if (!progress[moduleId]) {
+        progress[moduleId] = [];
+    }
+
+    if (!progress[moduleId].includes(lessonId)) {
+        progress[moduleId].push(lessonId);
+    }
+
+    localStorage.setItem("lessonProgress", JSON.stringify(progress));
+}
+
+function isLessonComplete(moduleId, lessonId) {
+    const progress = getProgress();
+    return progress[moduleId]?.includes(lessonId);
+}
+
+/* =========================
+   AUTO-UNLOCK IF COMPLETED
+   ========================= */
+
+if (isLessonComplete(moduleId, lessonId) && nextBtn) {
+    nextBtn.disabled = false;
+}
+
+/* =========================
+   RUN CODE
+   ========================= */
+
+function runCode() {
+    const code = codeEl.value.trim();
+    if (!code) return;
+
+    fetch("/run", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            code: code,
+            module_id: moduleId,
+            lesson_id: lessonId
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        outputEl.textContent +=
+`\n>>> ${code}
+${data.output}
+${data.feedback}\n`;
+
+        if (data.status === "correct") {
+            markLessonComplete(moduleId, lessonId);
+
+            if (nextBtn) {
+                nextBtn.disabled = false;
+            }
+        }
+
+        outputEl.scrollTop = outputEl.scrollHeight;
+        codeEl.focus();
+    });
+}
+
+/* =========================
+   NEXT LESSON (SKIP DONE)
+   ========================= */
+
+function goToNextLesson() {
+    let next = lessonId + 1;
+
+    while (isLessonComplete(moduleId, next)) {
+        next++;
+    }
+
+    window.location.href = `/module/${moduleId}?lesson=${next}`;
+}
+
+/* =========================
+   CTRL+ENTER
+   ========================= */
+
+codeEl.addEventListener("keydown", function (e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+        e.preventDefault();
+        runCode();
+    }
+});
+</script>
+
+</body>
+</html>

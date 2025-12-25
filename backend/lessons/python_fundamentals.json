@@ -1,0 +1,119 @@
+{
+  "module_id": "python_fundamentals",
+  "title": "Python Fundamentals",
+  "description": "Core Python concepts used in data engineering workflows",
+  "language": "python",
+  "difficulty": "beginner",
+  "lessons": [
+    {
+      "id": 1,
+      "slug": "print-output",
+      "title": "Printing Output",
+      "concept": "io",
+      "instruction": "Use the print() function to display the text:\n\nHello, Data Engineer",
+      "expected_output": "Hello, Data Engineer",
+      "hint": "Strings must be wrapped in quotes."
+    },
+    {
+      "id": 2,
+      "slug": "simple-math",
+      "title": "Simple Math",
+      "concept": "math",
+      "instruction": "Print the result of 5 + 3",
+      "expected_output": "8",
+      "hint": "You can print a math expression directly."
+    },
+    {
+      "id": 3,
+      "slug": "variables",
+      "title": "Variables",
+      "concept": "variables",
+      "instruction": "Create a variable x with the value 10 and print it.",
+      "expected_output": "10",
+      "hint": "Assign the variable first, then print it."
+    },
+    {
+      "id": 4,
+      "slug": "lists",
+      "title": "Lists",
+      "concept": "data-structures",
+      "instruction": "Create a list containing the numbers 1, 2, and 3, then print it.",
+      "expected_output": "[1, 2, 3]",
+      "hint": "Lists use square brackets."
+    },
+    {
+  "id": 5,
+  "slug": "string-concatenation",
+  "title": "String Concatenation",
+  "concept": "strings",
+  "instruction": "Create two variables:\n\nfirst = \"Data\"\nsecond = \"Engineer\"\n\nPrint them together as:\n\nData Engineer",
+  "expected_output": "Data Engineer",
+  "hint": "You can combine strings using the + operator."
+},
+{
+  "id": 6,
+  "slug": "numbers-and-types",
+  "title": "Numbers and Types",
+  "concept": "types",
+  "instruction": "Create a variable x with the value 5.\n\nPrint the type of x.",
+  "expected_output": "<class 'int'>",
+  "hint": "Use the type() function."
+},
+{
+  "id": 7,
+  "slug": "lists-and-indexing",
+  "title": "List Indexing",
+  "concept": "lists",
+  "instruction": "Create a list named values with these numbers:\n\n10, 20, 30\n\nPrint the first value in the list.",
+  "expected_output": "10",
+  "hint": "List indexing starts at 0."
+},
+{
+  "id": 8,
+  "slug": "list-length",
+  "title": "List Length",
+  "concept": "lists",
+  "instruction": "Create a list with the values:\n\n1, 2, 3, 4\n\nPrint how many items are in the list.",
+  "expected_output": "4",
+  "hint": "Use the len() function."
+},
+{
+  "id": 9,
+  "slug": "if-statements",
+  "title": "If Statements",
+  "concept": "conditionals",
+  "instruction": "Create a variable x with the value 10.\n\nIf x is greater than 5, print:\n\nGreater than 5",
+  "expected_output": "Greater than 5",
+  "hint": "Use an if statement with the > operator."
+},
+{
+  "id": 10,
+  "slug": "else-statements",
+  "title": "Else Statements",
+  "concept": "conditionals",
+  "instruction": "Create a variable x with the value 3.\n\nIf x is greater than 5, print \"High\".\nOtherwise, print \"Low\".",
+  "expected_output": "Low",
+  "hint": "Use if / else."
+},
+{
+  "id": 11,
+  "slug": "for-loops",
+  "title": "For Loops",
+  "concept": "loops",
+  "instruction": "Use a for loop to print the numbers:\n\n1\n2\n3",
+  "expected_output": "1\n2\n3",
+  "hint": "You can loop over a list or use range()."
+},
+{
+  "id": 12,
+  "slug": "simple-sum-loop",
+  "title": "Summing Values",
+  "concept": "loops",
+  "instruction": "Create a list with the values:\n\n1, 2, 3\n\nUse a loop to calculate the total and print it.",
+  "expected_output": "6",
+  "hint": "Start with total = 0 and add each value."
+}
+
+  ]
+  
+}

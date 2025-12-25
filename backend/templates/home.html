@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DataForge Daily</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body class="page-home">
+
+<!-- FIXED NAV -->
+<header class="fixed-nav">
+    <div class="fixed-nav-inner">
+
+        <img src="/static/logo.png" alt="DataForge Daily" class="nav-logo">
+
+        <nav class="fixed-nav-links">
+            <a class="active" href="#">Home</a>
+            <a href="#">Roadmap</a>
+            <a href="#">Modules</a>
+            <a href="#">About</a>
+        </nav>
+
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>
+            FORGE YOUR <span>DATA</span><br>
+            <span>ENGINEERING</span> SKILLS
+        </h1>
+
+        <p>
+            Structured learning tracks designed to take you from Python
+            fundamentals to real-world PySpark pipelines.
+        </p>
+
+        <a href="#modules" class="hero-btn">Start Learning</a>
+    </div>
+</section>
+
+<!-- LEARNING MODULES -->
+<section class="learning-section">
+    <div class="learning-inner">
+        <span class="section-tag">Learning Modules</span>
+        <h2>Choose a Track</h2>
+
+        <div class="track-grid">
+
+            <div class="track-card">
+                <h3>Python Fundamentals</h3>
+                <p>Essential building blocks for writing real Python programs.</p>
+
+                <div class="topic-list">
+                    <a href="/module/python_fundamentals?lesson=1">Print & Input</a>
+                    <a href="/module/python_fundamentals?lesson=2">Variables</a>
+                    <a href="/module/python_fundamentals?lesson=3">Data Types</a>
+                    <a href="/module/python_fundamentals?lesson=4">Conditional Statements</a>
+                    <a href="/module/python_fundamentals?lesson=5">Loops</a>
+                    <a href="/module/python_fundamentals?lesson=6">Data Structures</a>
+                    <a href="/module/python_fundamentals?lesson=7">Functions</a>
+                </div>
+
+                <a class="track-btn"
+   href="/module/python_fundamentals?lesson=1"
+   onclick="resumeModule(event, 'python_fundamentals')">
+   Enter Track
+</a>
+
+            </div>
+
+            <div class="track-card">
+                <h3>PySpark Fundamentals</h3>
+                <p>Distributed data processing using Spark DataFrames.</p>
+
+                <div class="topic-list">
+                    <a href="/modules/pyspark/dataframes">DataFrames</a>
+                    <a href="/modules/pyspark/select-filter">Select & Filter</a>
+                    <a href="/modules/pyspark/transformations">Transformations</a>
+                    <a href="/modules/pyspark/joins">Joins</a>
+                    <a href="/modules/pyspark/aggregations">Aggregations</a>
+                    <a href="/modules/pyspark/actions">Actions</a>
+                </div>
+
+                <a class="track-btn" href="/modules/pyspark">Enter Track</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+<script>
+function getProgress() {
+    return JSON.parse(localStorage.getItem("lessonProgress")) || {};
+}
+
+function resumeModule(event, moduleId) {
+    event.preventDefault();
+
+    const progress = getProgress();
+    const completed = progress[moduleId] || [];
+
+    let nextLesson = 1;
+
+    if (completed.length > 0) {
+        nextLesson = Math.max(...completed) + 1;
+    }
+
+    window.location.href = `/module/${moduleId}?lesson=${nextLesson}`;
+}
+</script>
+
+</body>
+</html>
